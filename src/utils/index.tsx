@@ -1,0 +1,1 @@
+export const tabs = ["World", "Environment", "Science", "Technology", "Business", "Entertainment", "Music", "Arts", "Health" ,"Sports", "Travel"]

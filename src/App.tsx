@@ -1,8 +1,16 @@
-import { Button } from '@mantine/core';
+import { Outlet } from 'react-router-dom';
+import { AppShell } from '@mantine/core';
+import Navbar from './components/Navbar';
+import { tabs } from './utils';
 
 function App() {
   return (
-    <Button>Click me!</Button>
+    <AppShell
+      padding="xs"
+      header={<Navbar tabs={tabs} />}
+    >
+      <Outlet />
+    </AppShell>
   )
 }
 
