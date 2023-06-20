@@ -12,8 +12,8 @@ import { useDisclosure } from '@mantine/hooks';
 const useStyles = createStyles((theme) => ({
     header: {
         paddingTop: theme.spacing.sm,
-        backgroundColor: theme.fn.variant({ variant: 'filled', color: theme.colors.gray[0] }).background,
-        borderBottom: `${rem(1)} solid ${theme.fn.variant({ variant: 'filled', color: theme.colors.gray[0] }).background}`,
+        backgroundColor: "#363636",
+        borderBottom: `${rem(1)} solid #363636`,
     },
 
     mainSection: {
@@ -41,21 +41,21 @@ const useStyles = createStyles((theme) => ({
         height: rem(38),
         color: theme.white,
         backgroundColor: 'transparent',
-        borderColor: theme.fn.variant({ variant: 'filled', color: theme.colors.gray[0] }).background,
+        borderColor: "#363636",
 
         '&:hover': {
             backgroundColor: theme.fn.lighten(
-                theme.fn.variant({ variant: 'filled', color: theme.colors.gray[0] }).background!,
+                "#363636"!,
                 0.1
             ),
         },
 
         '&[data-active]': {
             backgroundColor: theme.fn.lighten(
-                theme.fn.variant({ variant: 'filled', color: theme.colors.gray[0] }).background!,
+                "#363636"!,
                 0.1
             ),
-            borderColor: theme.fn.variant({ variant: 'filled', color: theme.colors.gray[0] }).background,
+            borderColor: "#363636",
         },
     },
 }));
