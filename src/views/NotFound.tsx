@@ -1,4 +1,4 @@
-import { Title, Text, Button, Container, Group, rem } from '@mantine/core';
+import { Title, Text, Button, Container, Group } from '@mantine/core';
 import { NotFoundStyles } from '../styles/404';
 
 const NotFound = () => {
