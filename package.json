@@ -16,6 +16,7 @@
     "@mantine/hooks": "^6.0.14",
     "@tabler/icons-react": "^2.22.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.8",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
     "react": "^18.2.0",

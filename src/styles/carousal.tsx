@@ -1,4 +1,4 @@
-import { createStyles, getStylesRef, rem } from "@mantine/core";
+import { createStyles, em, getStylesRef, rem } from "@mantine/core";
 
 export const carousalStyles = createStyles((theme) => ({
     imageContainer: {
@@ -26,8 +26,8 @@ export const carousalStyles = createStyles((theme) => ({
         },
         [theme.fn.smallerThan("sm")]: {
             top: "10%",
-            left: "0%",
-            right: "0%",
+            left: "5%",
+            right: "5%",
             marginRight: "0%",
             [`.${getStylesRef('headlineText')}`]: {
                 fontSize: `${rem(44)}`,
@@ -40,9 +40,9 @@ export const carousalStyles = createStyles((theme) => ({
             },
         },
         [theme.fn.smallerThan("xs")]: {
-            top: "10%",
-            left: "0%",
-            right: "0%",
+            top: "15%",
+            left: "5%",
+            right: "5%",
             marginRight: "0%",
             [`.${getStylesRef('headlineText')}`]: {
                 fontSize: `${rem(24)}`,
@@ -51,7 +51,22 @@ export const carousalStyles = createStyles((theme) => ({
                 fontSize: `${rem(14)}`,
             },
             [`.${getStylesRef('buttonRead')}`]: {
-                fontSize: `${rem(10)}`,
+                fontSize: `${rem(14)}`,
+            },
+        },
+        [`@media (max-width: ${em(440)})`]: {
+            top: "5%",
+            left: "2.5%",
+            right: "2.5%",
+            marginRight: "0%",
+            [`.${getStylesRef('headlineText')}`]: {
+                fontSize: `${rem(22)}`,
+            },
+            [`.${getStylesRef('subheadlineText')}`]: {
+                fontSize: `${rem(14)}`,
+            },
+            [`.${getStylesRef('buttonRead')}`]: {
+                fontSize: `${rem(14)}`,
             },
         },
     },
@@ -80,5 +95,8 @@ export const carousalStyles = createStyles((theme) => ({
             transitionDuration: "0.25s",
             backgroundColor: "rgba(70, 70, 70, 0.75)",
         }
-    }
+    },
+    carousal: {
+        display: "none",
+    },
 }));

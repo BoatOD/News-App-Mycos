@@ -1,4 +1,4 @@
-interface tabsInterface {
+export interface tabsInterface {
     label: string,
     value: string
 }
@@ -9,7 +9,7 @@ export interface HeaderTabsProps {
 
 export const tabs = [
     {
-        label: "General",
+        label: "World",
         value: "general"
     },
     {

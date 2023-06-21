@@ -1,29 +1,32 @@
-import { Box, Card, Center, Flex, Grid, Group, Image, SimpleGrid, Text, rem } from "@mantine/core"
+import { Box, Card, Center, Container, Grid, Image, Text } from "@mantine/core"
 import { headlineNewsStyles } from "../styles/headlineNews"
 import { IconMinusVertical } from "@tabler/icons-react";
+import { NewsProps } from "../utils/newsUtils";
 
-const NewsHorizontal = () => {
+const NewsHorizontal = ({ category, news }: NewsProps) => {
+    const noImage = "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
     const { classes } = headlineNewsStyles();
     return (
-        <Card className={classes.card} shadow="md" padding="xs" radius="md" component="a" href="https://www.cnn.com/2023/06/19/europe/titanic-shipwreck-vessel-missing-intl/index.html" target="_blank" withBorder>
-            <Card.Section>
-                <Grid grow>
-                    <Grid.Col span={7} p="xs">
-                        <Center inline>
-                            <IconMinusVertical color="gray" />
-                            <Text weight={500} size="md" color="dimmed">General</Text>
-                        </Center>
-                        <Text px="xs" size="xs" weight={300} color="dimmed" lineClamp={3}>A search and rescue operation is underway for a submersible touring the wreckage of the Titanic - CNN A search and rescue operation is underway for a submersible touring the wreckage of the Titanic - CNN</Text>
-                    </Grid.Col>
-                    <Grid.Col span={5} p={0}>
-                        <Image
-                            src="https://media.cnn.com/api/v1/images/stellar/prod/230619160119-hp-card-04-oceangate-titan-sub-file.jpg?c=16x9&q=w_800,c_fill"
-                        />
-                    </Grid.Col>
-                    
-                </Grid>
-            </Card.Section>
-        </Card>
+        <Box>
+            <Card className={classes.card} shadow="md" padding="xs" radius="md" component="a" href={news.url ?? noImage} target="_blank" withBorder>
+                <Card.Section>
+                    <Grid grow>
+                        <Grid.Col sm={6} md={7} p="xs">
+                            <Center inline>
+                                <IconMinusVertical color="gray" />
+                                <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
+                            </Center>
+                            <Text px="xs" size="xs" weight={300} color="dimmed" lineClamp={3}>{news.description ?? news.title}</Text>
+                        </Grid.Col>
+                        <Grid.Col sm={6} md={5} p={0}>
+                            <Image
+                                src={news.imageUrl ?? noImage}
+                            />
+                        </Grid.Col>
+                    </Grid>
+                </Card.Section>
+            </Card>
+        </Box>
     )
 }
 
