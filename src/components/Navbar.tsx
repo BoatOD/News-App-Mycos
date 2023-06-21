@@ -1,106 +1,117 @@
 import {
-    createStyles,
     Container,
     Group,
-    Text,
     Tabs,
     Burger,
+    Image,
+    Divider,
+    MediaQuery,
+    Center,
+    Transition,
+    NavLink as NavLinkBtn,
+    Box,
     rem,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+    Space,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { HeaderTabsProps } from "../utils/navbarUtils";
+import { navbarStyles } from "../styles/navbar";
+import logo from "../assets/logo.svg";
+import { IconSearch } from "@tabler/icons-react";
+import SearchBar from "./SearchBar";
 
-const useStyles = createStyles((theme) => ({
-    header: {
-        paddingTop: theme.spacing.sm,
-        backgroundColor: "#363636",
-        borderBottom: `${rem(1)} solid #363636`,
-    },
-
-    mainSection: {
-        paddingBottom: theme.spacing.sm,
-    },
-
-    burger: {
-        [theme.fn.largerThan('md')]: {
-            display: 'none',
-        },
-    },
-
-    tabs: {
-        [theme.fn.smallerThan('md')]: {
-            display: 'none',
-        },
-    },
-
-    tabsList: {
-        borderBottom: '0 !important',
-    },
-
-    tab: {
-        fontWeight: 500,
-        height: rem(38),
-        color: theme.white,
-        backgroundColor: 'transparent',
-        borderColor: "#363636",
-
-        '&:hover': {
-            backgroundColor: theme.fn.lighten(
-                "#363636"!,
-                0.1
-            ),
-        },
-
-        '&[data-active]': {
-            backgroundColor: theme.fn.lighten(
-                "#363636"!,
-                0.1
-            ),
-            borderColor: "#363636",
-        },
-    },
-}));
-
-interface HeaderTabsProps {
-    tabs: string[];
-}
 const Navbar = ({ tabs }: HeaderTabsProps) => {
-    const { classes, theme } = useStyles();
+    const navigate = useNavigate();
+    const { category } = useParams();
+    const { classes, theme } = navbarStyles();
     const [opened, { toggle }] = useDisclosure(false);
 
-    const items = tabs.map((tab) => (
-        <Tabs.Tab value={tab} key={tab}>
-            {tab}
+    const itemsTabs = tabs.map((tab, index) => (
+        <Tabs.Tab value={tab.value} key={index}>
+            {tab.label}
         </Tabs.Tab>
     ));
+
+    const itemsLinks = tabs.map((link, index) => (
+        <NavLinkBtn
+            component={NavLink}
+            className={classes.link}
+            key={index}
+            label={link.label}
+            to={link.value}
+            variant="filled"
+            color="gray"
+            onClick={toggle}
+        />
+    ));
+    
     return (
         <div className={classes.header}>
-            <Container className={classes.mainSection} pb={0}>
-                <Group position="center">
-                    <Text size={25}>Paper News</Text>
-                    <Burger
-                        opened={opened}
-                        onClick={toggle}
-                        className={classes.burger}
-                        size="sm"
-                        color={theme.white}
-                    />
-                </Group>
+            <Container>
+                <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+                    <Group position="apart">
+                        <Burger
+                            opened={opened}
+                            onClick={toggle}
+                            className={classes.burger}
+                            size="sm"
+                            color={theme.white}
+                        />
+                        <Link onClick={() => opened && toggle()} to="/">
+                            <Image src={logo} width={186} />
+                        </Link>
+                        <div></div>
+                    </Group>
+                </MediaQuery>
+                <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                    <Group position="center">
+                        <Burger
+                            opened={opened}
+                            onClick={toggle}
+                            className={classes.burger}
+                            size="sm"
+                            color={theme.white}
+                        />
+                        <Link onClick={() => opened && toggle()} to="/">
+                            <Image src={logo} width={226} />
+                        </Link>
+                    </Group>
+                </MediaQuery>
+                <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+                    <Divider />
+                </MediaQuery>
             </Container>
             <Container>
-                <Tabs
-                    defaultValue="Home"
-                    variant="outline"
-                    classNames={{
-                        root: classes.tabs,
-                        tabsList: classes.tabsList,
-                        tab: classes.tab,
-                    }}
-                >
-                    <Tabs.List>{items}</Tabs.List>
-                </Tabs>
+                <Center>
+                    <Tabs
+                        variant="outline"
+                        classNames={{
+                            root: classes.tabs,
+                            tabsList: classes.tabsList,
+                            tab: classes.tab,
+                        }}
+                        value={category ? category : null} 
+                        onTabChange={(value) => navigate(`${value}`)}
+                    >
+                        <Tabs.List>{itemsTabs}</Tabs.List>
+                    </Tabs>
+                    <Space className={classes.search} w="lg" />
+                    <Link to="/search"><IconSearch className={classes.search} color="white" /></Link>
+                </Center>
             </Container>
+            <Transition transition="scale-y" duration={300} mounted={opened}>
+                {(styles) => (
+                    <Container pb={12} style={styles}>
+                        <Box className={classes.dropdown}>
+                            <SearchBar pb={8} />
+                            {itemsLinks}
+                        </Box>
+                    </Container>
+                )}
+            </Transition>
         </div>
     );
-}
+};
 
-export default Navbar
+export default Navbar;

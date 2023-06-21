@@ -3,11 +3,13 @@ import App from "../App";
 import News from "../views/News";
 import Home from "../views/Home";
 import Search from "../views/Search";
+import NotFound from "../views/NotFound";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        errorElement: <NotFound />,
         children: [
             {
                 path: "",
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
                 element: <News />,
             },
             {
-                path: "search",
+                path: "search/:query?",
                 element: <Search />,
             },
         ]
