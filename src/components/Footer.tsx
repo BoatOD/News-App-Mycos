@@ -1,21 +1,21 @@
 import {
-    Text,
-    Container,
-    ActionIcon,
-    Group,
-    Image,
+  Text,
+  Container,
+  ActionIcon,
+  Group,
+  Image,
 } from "@mantine/core";
 import {
-    IconBrandTwitter,
-    IconBrandYoutube,
-    IconBrandInstagram,
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconBrandInstagram,
 } from "@tabler/icons-react";
 import { FooterLinksProps } from "../utils/footerUtils";
 import logo from "../assets/logo2.svg";
 import { footerStyles } from "../styles/footer";
 
 const FooterCustom = ({ data }: FooterLinksProps) => {
-    const { classes } = footerStyles();
+  const { classes } = footerStyles();
 
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
@@ -42,7 +42,7 @@ const FooterCustom = ({ data }: FooterLinksProps) => {
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-            <Image src={logo} width={226} />
+          <Image src={logo} width={226} />
         </div>
         <div className={classes.groups}>{groups}</div>
       </Container>

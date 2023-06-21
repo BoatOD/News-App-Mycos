@@ -8,6 +8,11 @@ import Footer from './components/Footer';
 function App() {
   return (
     <AppShell
+      styles={{
+        main: {
+          padding: 0
+        },
+      }}
       header={<Navbar tabs={tabs} />}
       footer={<Footer data={footerLinks} />}
     >
