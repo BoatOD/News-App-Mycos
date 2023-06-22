@@ -4,6 +4,8 @@ import News from "../views/News";
 import Home from "../views/Home";
 import Search from "../views/Search";
 import NotFound from "../views/NotFound";
+import { Suspense } from "react";
+import { Loader, Center } from "@mantine/core";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
             },
             {
                 path: ":category",
-                element: <News />,
+                element: <Suspense fallback={<Center><Loader color="gray" size="lg" /></Center> }><News /></Suspense>,
             },
             {
                 path: "search/:query?",

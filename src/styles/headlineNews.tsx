@@ -27,5 +27,17 @@ export const headlineNewsStyles = createStyles((theme) => ({
     },
     arrow: {
         color: "#808080"
+    },
+    imageCard: {
+        height: "55%",
+        objectFit: "contain"
+    },
+    image: {
+        height: "100%",
+        width: "100%",
+        objectFit: "cover"
+    },
+    text:{
+        display: "none"
     }
 }));

@@ -8,7 +8,7 @@ const HeadlineNews = () => {
       <NewsSection category={tabs[0]} />
       <NewsSection category={tabs[3]} />
       <NewsSection category={tabs[1]} />
-      {/* <NewsSection category={tabs[4]} /> */}
+      <NewsSection category={tabs[4]} />
     </Box>
   )
 }

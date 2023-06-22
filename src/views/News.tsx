@@ -13,13 +13,14 @@ const News = () => {
   const country = "us";
     const [news, setNews] = useState<NewsInterface[]>([])
     const loadNews = async () => {
+      setNews([])
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_NEWS_API_URL}?apiKey=${import.meta.env.VITE_NEWS_API_KEY}&country=${country}&sortBy=popularity`);
+            const { data } = await axios.get(`${import.meta.env.VITE_NEWS_API_URL}?apiKey=${import.meta.env.VITE_NEWS_API_KEY}&country=${country}&sortBy=popularity&category=${category}`);
             console.log(data)
             data.articles.forEach((item: any) => {
                 setNews((prevItem) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.author, url: item.url, imageUrl: item.urlToImage }])
             });
-            
+            console.log(news)
         } catch (error) {
             console.error(error);
         }
@@ -29,11 +30,11 @@ const News = () => {
         loadNews();
     }, [])
     useEffect(() => {
-      console.log(news)
-  }, [news])
+      loadNews();
+  }, [category])
   return (
     <SimpleGrid cols={2}>
-      <div>
+      {news.length > 0 && <><div>
         <Container>
          <Newscard category={category ?? null} news={news[0]}/>
         </Container>
@@ -66,7 +67,7 @@ const News = () => {
         <Container>
           <Newscard category={category ?? null} news={news[5]}/>
         </Container>
-      </div>
+      </div></>}
     </SimpleGrid>
   )
 }

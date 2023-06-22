@@ -1,17 +1,17 @@
-import { TextInput, TextInputProps, ActionIcon, useMantineTheme, Grid, Loader, Center, Box, rem } from '@mantine/core';
+import { TextInput, ActionIcon, useMantineTheme, Grid, Loader, Center, Box } from '@mantine/core';
 import { IconSearch, IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
-import { MantineProvider } from '@mantine/core';
-import { Button, CircularProgress } from '@mui/material'
 
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import News from '../components/News';
+import { useParams } from 'react-router-dom';
 
-function Search(props: TextInputProps) {
+const Search = () => {
   const theme = useMantineTheme();
+  const { query } = useParams();
   const [news, setNews] = useState<any>([])
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<string>('');
 
-  const [loading,setLoading]=useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const handleSearch = () => {
     const test = `https://newsapi.org/v2/everything?q=${value}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`;
@@ -29,17 +29,17 @@ function Search(props: TextInputProps) {
       .catch((error) => {
         console.error(error);
       });
-
-    
   }
 
-
+  useEffect(() => {
+    setValue(query ?? '');
+    handleSearch();
+  }, [query])
   return (
-    <>
-      <Grid>
-        <Grid.Col span="auto"></Grid.Col>
-        <Grid.Col span={6} >
-          <TextInput my="xl" value={value} onChange={(event) => setValue(event.currentTarget.value)}
+    <Grid>
+      <Grid.Col span="auto"></Grid.Col>
+      <Grid.Col span={6} >
+        <TextInput my="xl" value={value} onChange={(event) => setValue(event.currentTarget.value)}
           icon={<IconSearch size="1.1rem" stroke={1.5} />}
           radius="xl"
           size="md"
@@ -54,18 +54,21 @@ function Search(props: TextInputProps) {
           }
           placeholder="Search for News"
           rightSectionWidth={42}
-          {...props}
+          styles={(theme) => ({
+            input: {
+              '&:focus-within': {
+                borderColor: "gray",
+              },
+            },
+          })}
           onKeyUp={(e) => e.key === "Enter" && handleSearch()}
         />
         {
-          loading ? <Center><Loader color="gray" size="lg" /></Center> : <>{news.map((item: any, index: any) => <Box my="xl"><News category={null} key={index} news={item} /></Box>) }</>
+          loading ? <Center><Loader color="gray" size="lg" /></Center> : <>{news.map((item: any, index: any) => <Box my="xl"><News category={null} key={index} news={item} /></Box>)}</>
         }
-        </Grid.Col>
-        <Grid.Col span="auto"></Grid.Col>
-      </Grid>
-
-      
-    </>
+      </Grid.Col>
+      <Grid.Col span="auto"></Grid.Col>
+    </Grid>
   );
 }
 
