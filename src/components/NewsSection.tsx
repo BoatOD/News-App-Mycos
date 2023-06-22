@@ -1,13 +1,34 @@
-import { Box, Button, Center, Divider, Group, SimpleGrid, Space, Stack, Text, rem } from "@mantine/core"
+import { useState, useEffect } from "react"
+import { Box, Button, Divider, Group, SimpleGrid, Space, Text, rem } from "@mantine/core"
 import { headlineNewsStyles } from "../styles/headlineNews"
 import News from "./News"
-import NewsHorizontal from "./NewsHorizontal"
+// import NewsHorizontal from "./NewsHorizontal"
 import { IconArrowRight } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
-import { NewsSectionProps } from "../utils/newsUtils"
+import { NewsInterface, NewsSectionProps } from "../utils/newsUtils"
+import axios from 'axios';
 
-const NewsSection = ({ category, news }: NewsSectionProps) => {
+const NewsSection = ({ category }: NewsSectionProps) => {
     const { classes } = headlineNewsStyles();
+    const country = "us";
+    const [news, setNews] = useState<NewsInterface[]>([])
+    const loadNews = async () => {
+        try {
+            const { data } = await axios.get(`${import.meta.env.VITE_NEWS_API_URL}?apiKey=${import.meta.env.VITE_NEWS_API_KEY}&country=${country}&category=${category.value}&pageSize=2&sortBy=popularity`);
+            console.log(data)
+            data.articles.forEach((item: any) => {
+                setNews((prevItem) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.author, url: item.url, imageUrl: item.urlToImage }])
+            });
+            console.log(news)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        loadNews();
+        console.log('load')
+    }, [])
     return (
         <Box>
             <Divider
@@ -22,38 +43,13 @@ const NewsSection = ({ category, news }: NewsSectionProps) => {
                     </>
                 }
             />
-            <SimpleGrid 
+            <SimpleGrid
                 breakpoints={[
                     { minWidth: 'xs', cols: 1 },
                     { minWidth: 'sm', cols: 2 },
                 ]}
             >
-                {
-                category.value === "general" ? 
-                    <>
-                        <News category={category.label} news={news[0]} />
-                        <SimpleGrid breakpoints={[
-                            { minWidth: 'xs', cols: 2 },
-                            { minWidth: 'sm', cols: 1 }
-                        ]}>
-                            {news.slice(1).map((item, index) => <NewsHorizontal key={index} category={category.label} news={item} /> )}
-                        </SimpleGrid>
-                    </> : category.value === "business" ? <>
-                        {news.map((item, index) => <Center><NewsHorizontal key={index} category={category.label} news={item} /></Center> )}
-                    </> : category.value === "science" ? <>
-                        <News category={category.label} news={news[0]} />
-                        <News category={category.label} news={news[1]} />
-                    </> : <>
-                        <News category={category.label} news={news[0]} />
-                        <SimpleGrid breakpoints={[
-                            { minWidth: 'xs', cols: 2 },
-                            { minWidth: 'sm', cols: 1 }
-                        ]}>
-                            {news.slice(1).map((item, index) => <NewsHorizontal key={index} category={category.label} news={item} /> )}
-                        </SimpleGrid>
-                    </>
-                }
-                
+                {news.map((item, index) => <News key={index} category={category.label} news={item} />)}
             </SimpleGrid>
             <Group position="right">
                 <Button mt={rem(16)} component={Link} to={`/${category.value}`} className={classes.buttonMore} rightIcon={<IconArrowRight className={classes.arrow} />} variant="outline" radius="xl" uppercase>

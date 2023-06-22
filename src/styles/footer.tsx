@@ -2,7 +2,7 @@ import { createStyles, rem } from "@mantine/core";
 
 export const footerStyles = createStyles((theme) => ({
   footer: {
-    marginTop: rem(120),
+    marginTop: rem(48),
     paddingTop: `${theme.spacing.xl}`,
     paddingBottom: `${theme.spacing.xl}`,
     backgroundColor: "#393939",

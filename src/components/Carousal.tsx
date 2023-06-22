@@ -170,7 +170,7 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                 <Carousel
                     withControls={false}
                     withIndicators
-                    height={rem(640)}
+                    height={rem(550)}
                     slideGap={0}
                     loop
                     plugins={[autoplay]}

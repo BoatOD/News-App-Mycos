@@ -14,21 +14,23 @@ const News = ({ category, news }: NewsProps) => {
                     src={news.imageUrl ?? noImage}
                 />
             </Card.Section>
-            <Card.Section mt="xs">
-                <Center ml="xs" inline>
-                    <IconMinusVertical color="gray" />
-                    <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
-                </Center>
-            </Card.Section>
             <Box>
-                <Text weight={500} size="xl">{news.title}</Text>
-                <Text lineClamp={4} size="sm" weight={300} color="dimmed">
-                    {news.description}
+                <Card.Section mt="xs">
+                    <Center ml="xs" inline>
+                        <IconMinusVertical color="gray" />
+                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
+                    </Center>
+                </Card.Section>
+                <Box>
+                    <Text weight={500} size="xl">{news.title}</Text>
+                    <Text lineClamp={4} size="sm" weight={300} color="dimmed">
+                        {news.description}
+                    </Text>
+                </Box>
+                <Text mt="sm" size="sm" weight={300} color="dimmed">
+                    {dayjs(news.date).format('D MMMM YYYY')} | {news.author}
                 </Text>
             </Box>
-            <Text mt="sm" size="sm" weight={300} color="dimmed">
-                {dayjs(news.date).format('D MMMM YYYY')} | {news.author}
-            </Text>
         </Card>
     )
 }
