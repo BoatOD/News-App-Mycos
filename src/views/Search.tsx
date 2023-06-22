@@ -18,7 +18,6 @@ function Search() {
         {data_2.map((item)=>{
           console.log(item.author)
           console.log(item.content)
-          console.log(item.)
           
         })}
       })
