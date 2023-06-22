@@ -15,65 +15,67 @@ const News = ({ category, news }: NewsProps) => {
                     src={news.imageUrl ?? noImage}
                 />
             </Card.Section>
-            <Card.Section mt="xs">
-                <Center ml="xs" inline>
-                    <IconMinusVertical color="gray" />
-                    <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
-                </Center>
-            </Card.Section>
-            <MediaQuery className={classes.text} smallerThan="xs" styles={{ display: "block" }}>
-                <Box>
-                    <Text lineClamp={2} weight={500} size="lg">{news.title}</Text>
-                    <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
-                        {news.description}
-                    </Text>
-                </Box>
-            </MediaQuery>
-            <MediaQuery className={classes.text} largerThan="xs" smallerThan="sm" styles={{ display: "block" }}>
-                <Box>
-                    <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
-                    <Text mt="xs" lineClamp={4} size="md" weight={300} color="dimmed">
-                        {news.description}
-                    </Text>
-                    <Text mt="xs" size="md" weight={300} color="dimmed">
-                        {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
-                    </Text>
-                </Box>
-            </MediaQuery>
-            <MediaQuery className={classes.text} largerThan="sm" smallerThan="md" styles={{ display: "block" }}>
-                <Box>
-                    <Text lineClamp={2} weight={500} size="lg">{news.title}</Text>
-                    <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
-                        {news.description}
-                    </Text>
-                    <Text mt="xs" size="sm" weight={300} color="dimmed">
-                        {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
-                    </Text>
-                </Box>
-            </MediaQuery>
-            <MediaQuery className={classes.text} smallerThan="lg" largerThan="md" styles={{ display: "block" }}>
-                <Box>
-                    <Text lineClamp={3} weight={500} size="lg">{news.title}</Text>
-                    <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
-                        {news.description}
-                    </Text>
-                    <Text mt="xs" size="sm" weight={300} color="dimmed">
-                        {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
-                    </Text>
-                </Box>
-            </MediaQuery>
-            <MediaQuery className={classes.text} largerThan="lg" styles={{ display: "block" }}>
-                <Box>
-                    <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
-                    <Text mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed">
-                        {news.description}
-                    </Text>
-                    <Text mt="xs" size="sm" weight={300} color="dimmed">
-                        {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
-                    </Text>
-                </Box>
-            </MediaQuery>
-            
+            <Box>
+                <Card.Section mt="xs">
+                    <Center ml="xs" inline>
+                        <IconMinusVertical color="gray" />
+                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
+                    </Center>
+                </Card.Section>
+                <MediaQuery className={classes.text} smallerThan="xs" styles={{ display: "block" }}>
+                    <Box>
+                        <Text lineClamp={2} weight={500} size="lg">{news.title}</Text>
+                        <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
+                            {news.description}
+                        </Text>
+                    </Box>
+                </MediaQuery>
+                <MediaQuery className={classes.text} largerThan="xs" smallerThan="sm" styles={{ display: "block" }}>
+                    <Box>
+                        <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
+                        <Text mt="xs" lineClamp={4} size="md" weight={300} color="dimmed">
+                            {news.description}
+                        </Text>
+                        <Text mt="xs" size="md" weight={300} color="dimmed">
+                            {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
+                        </Text>
+                    </Box>
+                </MediaQuery>
+                <MediaQuery className={classes.text} largerThan="sm" smallerThan="md" styles={{ display: "block" }}>
+                    <Box>
+                        <Text lineClamp={2} weight={500} size="lg">{news.title}</Text>
+                        <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
+                            {news.description}
+                        </Text>
+                        <Text mt="xs" size="sm" weight={300} color="dimmed">
+                            {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
+                        </Text>
+                    </Box>
+                </MediaQuery>
+                <MediaQuery className={classes.text} smallerThan="lg" largerThan="md" styles={{ display: "block" }}>
+                    <Box>
+                        <Text lineClamp={3} weight={500} size="lg">{news.title}</Text>
+                        <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
+                            {news.description}
+                        </Text>
+                        <Text mt="xs" size="sm" weight={300} color="dimmed">
+                            {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
+                        </Text>
+                    </Box>
+                </MediaQuery>
+                <MediaQuery className={classes.text} largerThan="lg" styles={{ display: "block" }}>
+                    <Box>
+                        <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
+                        <Text mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed">
+                            {news.description}
+                        </Text>
+                        <Text mt="xs" size="sm" weight={300} color="dimmed">
+                            {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
+                        </Text>
+                    </Box>
+                </MediaQuery>
+
+            </Box>
         </Card>
     )
 }

@@ -3,25 +3,28 @@ import { BackgroundImage } from '@mantine/core';
 import * as dayjs from 'dayjs'
 import { IconMinusVertical } from "@tabler/icons-react";
 import { NewsProps } from "../utils/newsUtils";
+import { headlineNewsStyles } from "../styles/headlineNews";
 
 const NewsStack = ({ category, news }: NewsProps) => {
     const noImage = "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
-
+    const { classes } = headlineNewsStyles();
     return (
-        <Card component="a" href={news.url ?? "/404"} target="_blank" shadow="sm" padding="lg" py={0} radius="md" withBorder>
-            <Card.Section mt="xs">
-                <Center ml="xs" inline>
-                    <IconMinusVertical color="gray" />
-                    <Text weight={500} size="sm" color="dimmed" tt="capitalize">{category}</Text>
-                </Center>
-            </Card.Section>
+        <Card className={classes.card} component="a" href={news.url ?? "/404"} target="_blank" shadow="sm" padding="lg" radius="md" withBorder>
             <Box>
-                <Text weight={500} size="xl">{news.title}</Text>
-                <Text weight={300} size="sm" color="dimmed">{news.description}</Text>
+                <Card.Section>
+                    <Center ml="xs" inline>
+                        <IconMinusVertical color="gray" />
+                        <Text weight={500} size="sm" color="dimmed" tt="capitalize">{category}</Text>
+                    </Center>
+                </Card.Section>
+                <Box>
+                    <Text weight={500} size="xl">{news.title}</Text>
+                    <Text weight={300} size="sm" color="dimmed">{news.description}</Text>
+                </Box>
+                <Text mt="sm" size="sm" weight={300} color="dimmed">
+                    {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "By N/A"}
+                </Text>
             </Box>
-            <Text mt="sm" size="sm" weight={300} color="dimmed">
-                {dayjs(news.date).format('D MMMM YYYY')} | {news.author}
-            </Text>
         </Card>
     )
 }

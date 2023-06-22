@@ -29,11 +29,11 @@ export const headlineNewsStyles = createStyles((theme) => ({
         color: "#808080"
     },
     imageCard: {
-        height: "55%",
+        height: "auto",
         objectFit: "contain"
     },
     image: {
-        height: "100%",
+        height: `${rem(256)}`,
         width: "100%",
         objectFit: "cover"
     },
