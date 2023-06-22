@@ -27,7 +27,6 @@ const NewsSection = ({ category }: NewsSectionProps) => {
 
     useEffect(() => {
         loadNews();
-        console.log('load')
     }, [])
     return (
         <Box>
