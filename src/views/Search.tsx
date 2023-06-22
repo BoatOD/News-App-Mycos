@@ -13,6 +13,14 @@ function Search() {
       .then((data) => {
         // Handle the fetched data
         console.log(data);
+        const data_2 = data.articles;
+        console.log(data_2)
+        {data_2.map((item)=>{
+          console.log(item.author)
+          console.log(item.content)
+          console.log(item.)
+          
+        })}
       })
       .catch((error) => {
         // Handle any errors
