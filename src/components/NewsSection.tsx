@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import { Box, Button, Divider, Group, SimpleGrid, Space, Text, rem } from "@mantine/core"
 import { headlineNewsStyles } from "../styles/headlineNews"
 import News from "./News"
-// import NewsHorizontal from "./NewsHorizontal"
 import { IconArrowRight } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import { NewsInterface, NewsSectionProps } from "../utils/newsUtils"
@@ -15,11 +14,9 @@ const NewsSection = ({ category }: NewsSectionProps) => {
     const loadNews = async () => {
         try {
             const { data } = await axios.get(`${import.meta.env.VITE_NEWS_API_URL}?apiKey=${import.meta.env.VITE_NEWS_API_KEY}&country=${country}&category=${category.value}&pageSize=2&sortBy=popularity`);
-            console.log(data)
             data.articles.forEach((item: any) => {
                 setNews((prevItem) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.author, url: item.url, imageUrl: item.urlToImage }])
             });
-            console.log(news)
         } catch (error) {
             console.error(error);
         }
