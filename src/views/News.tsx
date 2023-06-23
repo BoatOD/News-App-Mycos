@@ -20,8 +20,9 @@ const News = () => {
   useEffect(() => {
     setNews([])
     setNewsF5([])
-    setLoading(true)
+    
     async function fetchData() {
+      setLoading(true)
       fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=22f1aa94799147b78e0c9459099831f6`)
         .then(res => res.json())
         .then(json => {
@@ -55,10 +56,10 @@ const News = () => {
             }])
 
           });
-
+          setLoading(false)
         })
         .catch(error => console.log(error))
-      setLoading(false)
+      
     }
     fetchData();
   }, [category])
@@ -68,7 +69,7 @@ const News = () => {
   }, [pathname]);
   return (
     <Container>
-      {loading ? <Center><Loader color="gray" size="lg" /></Center> : <>
+      {loading ? <Center mt="xl"><Loader color="gray" size="xl" /></Center> : <>
         <Text className={classes.headlineText} color="black" tt="uppercase" my="xl">{categoryMapper[category ?? "general"]}</Text>
 
         <SimpleGrid
@@ -109,7 +110,7 @@ const News = () => {
             { minWidth: 'sm', cols: 2 },
           ]}
         >
-          {news.map((item: any, index: any) => <NewsCard category={category ?? null} news={item} />)}
+          {news.map((item: any, index: any) => <NewsCard key={index} category={category ?? null} news={item} />)}
         </SimpleGrid>
       </>}
     </Container>
