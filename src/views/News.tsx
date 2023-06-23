@@ -1,8 +1,8 @@
-import { Box, Divider, SimpleGrid, Space, rem } from "@mantine/core";
+import { Box, Divider, MediaQuery, SimpleGrid, Space, rem } from "@mantine/core";
 import { Stack, Button, Text } from "@mantine/core";
 import { Container } from "@mantine/core";
 import Newscard from "../components/News";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import NewsStack from "../components/NewsStack";
 import { NewsInterface } from "../utils/newsUtils";
 import { headlineNewsStyles } from "../styles/headlineNews"
@@ -11,6 +11,7 @@ import NewsCard from "../components/News";
 
 const News = () => {
   const { category } = useParams();
+  const { pathname } = useLocation();
   const { classes } = headlineNewsStyles();
   const newsWorldData: NewsInterface[] = [
     {
@@ -67,6 +68,10 @@ const News = () => {
     console.log(category)
     // เช็คว่า category มี การ update หรือไม่ ถ้า update จะทำอะไร
   }, [category]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <Container>
       <Text className={classes.headlineText} color="black" tt="uppercase" my="xl">{category}</Text>
@@ -78,10 +83,13 @@ const News = () => {
                 ]}
             >
         <Newscard category={category ?? null} news={newsWorldData[0]} />
-        <Stack justify="flex-start">
-          <NewsStack category={category ?? null} news={newsWorldData[2]} />
-          <NewsStack category={category ?? null} news={newsWorldData[3]} />
-        </Stack>
+        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+          <Stack align="center">
+            <NewsStack category={category ?? null} news={newsWorldData[2]} />
+            <NewsStack category={category ?? null} news={newsWorldData[3]} />
+          </Stack>
+        </MediaQuery>
+        
         <Newscard category={category ?? null} news={newsWorldData[4]} />
         <Newscard category={category ?? null} news={newsWorldData[1]} />
       </SimpleGrid>

@@ -18,8 +18,8 @@ const NewsStack = ({ category, news }: NewsProps) => {
                     </Center>
                 </Card.Section>
                 <Box>
-                    <Text weight={500} size="xl">{news.title}</Text>
-                    <Text weight={300} size="sm" color="dimmed">{news.description}</Text>
+                    <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
+                    <Text lineClamp={3} weight={300} size="sm" color="dimmed">{news.description}</Text>
                 </Box>
                 <Text mt="sm" size="sm" weight={300} color="dimmed">
                     {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "By N/A"}

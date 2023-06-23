@@ -59,7 +59,7 @@ const Navbar = ({ tabs }: HeaderTabsProps) => {
                             color={theme.white}
                         />
                         <Link onClick={() => opened && toggle()} to="/">
-                            <Image src={logo} width={186} />
+                            <Image my="xs" src={logo} width={186} />
                         </Link>
                         <div></div>
                     </Group>
@@ -74,7 +74,7 @@ const Navbar = ({ tabs }: HeaderTabsProps) => {
                             color={theme.white}
                         />
                         <Link onClick={() => opened && toggle()} to="/">
-                            <Image src={logo} width={226} />
+                            <Image my="xs" src={logo} width={226} />
                         </Link>
                     </Group>
                 </MediaQuery>
