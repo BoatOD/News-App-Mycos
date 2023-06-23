@@ -14,6 +14,6 @@ export interface NewsSectionProps {
 }
 
 export interface NewsProps {
-    category: tabsInterface,
+    category: tabsInterface | null,
     news: NewsInterface
 }

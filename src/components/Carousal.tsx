@@ -8,7 +8,7 @@ import * as dayjs from 'dayjs'
 
 const CarousalSlider = ({ data }: CarousalProps) => {
     const { classes } = carousalStyles();
-    const autoplay = Autoplay({ delay: 7500 })
+    const autoplay = Autoplay({ delay: 5000 })
     return (
         <>
             <MediaQuery className={classes.carousal} query="(max-width: 27.5em)" styles={{ display: "block" }}>

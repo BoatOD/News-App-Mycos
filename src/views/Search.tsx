@@ -9,12 +9,12 @@ const Search = () => {
   const theme = useMantineTheme();
   const { query } = useParams();
   const [news, setNews] = useState<any>([])
-  const [value, setValue] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const handleSearch = () => {
-    const test = `https://newsapi.org/v2/everything?q=${value}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`;
+  const handleSearch = (value: string) => {
+    const test = `https://newsapi.org/v2/everything?q=${value}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&pageSize=50`;
     setLoading(true)
     setNews([]);
     fetch(test)
@@ -32,19 +32,22 @@ const Search = () => {
   }
 
   useEffect(() => {
-    setValue(query ?? '');
-    handleSearch();
+    if(query){
+      setSearchQuery(query)
+      handleSearch(query);
+    }
+
   }, [query])
   return (
     <Grid>
       <Grid.Col span="auto"></Grid.Col>
       <Grid.Col span={6} >
-        <TextInput my="xl" value={value} onChange={(event) => setValue(event.currentTarget.value)}
+        <TextInput my="xl" value={searchQuery} onChange={(event) => setSearchQuery(event.currentTarget.value)}
           icon={<IconSearch size="1.1rem" stroke={1.5} />}
           radius="xl"
           size="md"
           rightSection={
-            <ActionIcon size={32} radius="xl" color="gray" variant="filled" onClick={handleSearch}>
+            <ActionIcon size={32} radius="xl" color="gray" variant="filled" onClick={() => handleSearch(searchQuery)}>
               {theme.dir === 'ltr' ? (
                 <IconArrowRight size="1.1rem" stroke={1.5} />
               ) : (
@@ -64,7 +67,7 @@ const Search = () => {
           onKeyUp={(e) => e.key === "Enter" && handleSearch()}
         />
         {
-          loading ? <Center><Loader color="gray" size="lg" /></Center> : <>{news.map((item: any, index: any) => <Box my="xl"><News category={null} key={index} news={item} /></Box>)}</>
+          loading ? <Center><Loader color="gray" size="lg" /></Center> : <>{news.map((item: any, index: any) => <Box key={index} my="xl"><News category={null} news={item} /></Box>)}</>
         }
       </Grid.Col>
       <Grid.Col span="auto"></Grid.Col>

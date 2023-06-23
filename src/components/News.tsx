@@ -18,10 +18,11 @@ const News = ({ category, news }: NewsProps) => {
             </Card.Section>
             <Box>
                 <Card.Section mt="xs">
-                    <Center ml={rem(6)} inline>
+                    { category && <Center ml={rem(6)} inline>
                         <IconMinusVertical color={color[category.value as keyof colorInterface]} />
                         <Text weight={500} size="md" color="dimmed" tt="capitalize">{category.label}</Text>
                     </Center>
+                    }
                 </Card.Section>
                 <MediaQuery className={classes.text} smallerThan="xs" styles={{ display: "block" }}>
                     <Box>

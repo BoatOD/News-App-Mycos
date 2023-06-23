@@ -1,16 +1,17 @@
 import { TextInput, TextInputProps, ActionIcon, useMantineTheme } from '@mantine/core';
 import { IconSearch, IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 
-const SearchBar = (props: TextInputProps) => {
+const SearchBar = () => {
     const theme = useMantineTheme();
 
     return (
         <TextInput
+            mb="xs"
             icon={<IconSearch size="1.1rem" stroke={1.5} />}
             radius="xl"
             size="sm"
             rightSection={
-                <ActionIcon size={28} radius="xl" color={theme.primaryColor} variant="filled">
+                <ActionIcon size={28} radius="xl" color="gray" variant="filled">
                     {theme.dir === 'ltr' ? (
                         <IconArrowRight size="1.1rem" stroke={1.5} />
                     ) : (
@@ -18,9 +19,15 @@ const SearchBar = (props: TextInputProps) => {
                     )}
                 </ActionIcon>
             }
-            placeholder="Search questions"
             rightSectionWidth={42}
-            {...props}
+            placeholder="Search for News"
+            styles={(theme) => ({
+                input: {
+                '&:focus-within': {
+                    borderColor: "gray",
+                },
+                },
+            })}
         />
     );
 
