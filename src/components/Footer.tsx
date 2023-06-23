@@ -11,7 +11,7 @@ import {
   IconBrandInstagram,
 } from "@tabler/icons-react";
 import { FooterLinksProps } from "../utils/footerUtils";
-import logo from "../assets/logo2.svg";
+import logo from "../assets/logo.svg";
 import { footerStyles } from "../styles/footer";
 
 const FooterCustom = ({ data }: FooterLinksProps) => {

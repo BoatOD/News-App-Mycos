@@ -5,7 +5,6 @@ import { CarousalData } from '../utils/carousalUtils';
 import { useState, useEffect } from 'react';
 
 const Home = () => {
-  const [hasError, setErrors] = useState(false)
   const [carousalData, setCarousalData] = useState<CarousalData[]>([])
 
   useEffect(() => {
@@ -14,19 +13,15 @@ const Home = () => {
       res
         .json()
         .then(res => {
-          console.log(res.results)
           res.results.forEach((element: any) => {
             if (element.item_type !== "Promo") {
-              console.log(element)
-              setCarousalData((prevCarousalData) => [...prevCarousalData, { title: element.title, author: element.byline, date: new Date(element.published_date), imageUrl: element.multimedia[0].url, url: element.url }])
+              setCarousalData((prevCarousalData: any) => [...prevCarousalData, { title: element.title, author: element.byline, date: new Date(element.published_date), imageUrl: element.multimedia[0].url, url: element.url }])
             }
 
           });
-          setCarousalData((prevCarousalData) => prevCarousalData.slice(0, 5))
+          setCarousalData((prevCarousalData: any) => prevCarousalData.slice(0, 5))
         })
-        .catch(err => setErrors(err));
-      console.log(carousalData)
-
+        .catch(err => console.log(err));
     }
     fetchData();
   }, [])

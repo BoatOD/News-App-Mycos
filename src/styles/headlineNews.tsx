@@ -1,25 +1,5 @@
 import { createStyles, rem } from "@mantine/core";
 
-export interface colorInterface {
-    general: string,
-    science: string,
-    technology: string,
-    business: string,
-    entertainment: string,
-    health: string,
-    sports: string
-}
-
-export const color: colorInterface  = {
-    general: "gray",
-    science: "red",
-    technology: "pink",
-    business: "blue",
-    entertainment: "violet",
-    health: "green",
-    sports: "orange"
-}
-
 export const headlineNewsStyles = createStyles((theme) => ({
     headlineText: {
         fontWeight: 500,

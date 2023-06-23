@@ -5,10 +5,12 @@ import { IconArrowRight } from "@tabler/icons-react";
 import Autoplay from 'embla-carousel-autoplay';
 import { CarousalProps } from "../utils/carousalUtils";
 import * as dayjs from 'dayjs'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const CarousalSlider = ({ data }: CarousalProps) => {
     const { classes } = carousalStyles();
-    const autoplay = Autoplay({ delay: 5000 })
+    const autoplay = Autoplay({ delay: 7500 })
     return (
         <>
             <MediaQuery className={classes.carousal} query="(max-width: 27.5em)" styles={{ display: "block" }}>
@@ -26,7 +28,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                             <Carousel.Slide key={index} >
                                 <a href={item?.url} target="_blank">
                                     <Box className={classes.imageContainer}>
-                                        <Image className={classes.image} src={item?.imageUrl} />
+                                        <Box className={classes.image}>
+                                            <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                        </Box>
                                         <Group className={classes.detailImage} position="center">
                                             <Box>
                                                 <Text align="center" className={classes.headlineText}>{item.title}</Text>
@@ -57,7 +61,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                             <Carousel.Slide key={index} >
                                 <a href={item?.url} target="_blank">
                                     <Box className={classes.imageContainer}>
-                                        <Image className={classes.image} src={item?.imageUrl} />
+                                        <Box className={classes.image}>
+                                            <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                        </Box>
                                         <Group className={classes.detailImage} position="center">
                                             <Box>
                                                 <Text align="center" className={classes.headlineText}>{item.title}</Text>
@@ -88,7 +94,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                             <Carousel.Slide key={index} >
                                 <a href={item?.url} target="_blank">
                                     <Box className={classes.imageContainer}>
-                                        <Image className={classes.image} src={item?.imageUrl} />
+                                        <Box className={classes.image}>
+                                            <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                        </Box>
                                         <Group className={classes.detailImage} position="center">
                                             <Box>
                                                 <Text align="center" className={classes.headlineText}>{item.title}</Text>
@@ -121,7 +129,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                     <Box className={classes.imageContainer}>
                                         <MediaQuery smallerThan="md" styles={{ display: "none" }}>
                                             <Box>
-                                                <Image className={classes.image} src={item?.imageUrl} />
+                                                <Box className={classes.image}>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                                 <Group className={classes.detailImage} position="right">
                                                     <Box>
                                                         <Text align="end" className={classes.headlineText}>{item.title}</Text>
@@ -133,7 +143,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                         </MediaQuery>
                                         <MediaQuery largerThan="md" styles={{ display: "none" }}>
                                             <Box>
-                                                <Image className={classes.image} src={item?.imageUrl} />
+                                                <Box className={classes.image}>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                                                     <Group className={classes.detailImage} position="right">
                                                         <Box>
@@ -184,7 +196,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                     <Box className={classes.imageContainer}>
                                         <MediaQuery smallerThan="md" styles={{ display: "none" }}>
                                             <Box>
-                                                <Image className={classes.image} src={item?.imageUrl} />
+                                                <Box className={classes.image}>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                                 <Group className={classes.detailImage} position="right">
                                                     <Box>
                                                         <Text align="end" className={classes.headlineText}>{item.title}</Text>
@@ -196,7 +210,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                         </MediaQuery>
                                         <MediaQuery largerThan="md" styles={{ display: "none" }}>
                                             <Box>
-                                                <Image className={classes.image} src={item?.imageUrl} />
+                                                <Box className={classes.image}>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                                                     <Group className={classes.detailImage} position="right">
                                                         <Box>
@@ -247,7 +263,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                     <Box className={classes.imageContainer}>
                                         <MediaQuery smallerThan="md" styles={{ display: "none" }}>
                                             <Box>
-                                                <Image className={classes.image} src={item?.imageUrl} />
+                                                <Box className={classes.image}>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                                 <Group className={classes.detailImage} position="right">
                                                     <Box>
                                                         <Text align="end" className={classes.headlineText}>{item.title}</Text>
@@ -259,7 +277,9 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                         </MediaQuery>
                                         <MediaQuery largerThan="md" styles={{ display: "none" }}>
                                             <Box>
-                                                <Image className={classes.image} src={item?.imageUrl} />
+                                                <Box className={classes.image}>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                                 <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
                                                     <Group className={classes.detailImage} position="right">
                                                         <Box>

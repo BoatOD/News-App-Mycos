@@ -2,7 +2,7 @@ import { Box, Card, Center, Grid, Group, Image, SimpleGrid, Text } from "@mantin
 import { BackgroundImage } from '@mantine/core';
 import * as dayjs from 'dayjs'
 import { IconMinusVertical } from "@tabler/icons-react";
-import { NewsProps } from "../utils/newsUtils";
+import { NewsProps, color } from "../utils/newsUtils";
 import { headlineNewsStyles } from "../styles/headlineNews";
 
 const NewsStack = ({ category, news }: NewsProps) => {
@@ -13,8 +13,8 @@ const NewsStack = ({ category, news }: NewsProps) => {
             <Box>
                 <Card.Section>
                     <Center ml="xs" inline>
-                        <IconMinusVertical color="gray" />
-                        <Text weight={500} size="sm" color="dimmed" tt="capitalize">{category}</Text>
+                        <IconMinusVertical color={color[category ?? "general"]} />
+                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
                     </Center>
                 </Card.Section>
                 <Box>

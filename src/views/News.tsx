@@ -4,7 +4,7 @@ import { Container } from "@mantine/core";
 import Newscard from "../components/News";
 import { useLocation, useParams } from "react-router-dom";
 import NewsStack from "../components/NewsStack";
-import { NewsInterface } from "../utils/newsUtils";
+import { NewsInterface, categoryMapper } from "../utils/newsUtils";
 import { headlineNewsStyles } from "../styles/headlineNews"
 import { useEffect } from "react";
 import NewsCard from "../components/News";
@@ -74,14 +74,13 @@ const News = () => {
   }, [pathname]);
   return (
     <Container>
-      <Text className={classes.headlineText} color="black" tt="uppercase" my="xl">{category}</Text>
-
+      <Text className={classes.headlineText} color="black" tt="uppercase" my="xl">{categoryMapper[category ?? "general"]}</Text>
       <SimpleGrid
-                breakpoints={[
-                    { minWidth: 'xs', cols: 1 },
-                    { minWidth: 'sm', cols: 2 },
-                ]}
-            >
+        breakpoints={[
+          { minWidth: 'xs', cols: 1 },
+          { minWidth: 'sm', cols: 2 },
+        ]}
+      >
         <Newscard category={category ?? null} news={newsWorldData[0]} />
         <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
           <Stack align="center">
@@ -89,30 +88,30 @@ const News = () => {
             <NewsStack category={category ?? null} news={newsWorldData[3]} />
           </Stack>
         </MediaQuery>
-        
+
         <Newscard category={category ?? null} news={newsWorldData[4]} />
         <Newscard category={category ?? null} news={newsWorldData[1]} />
       </SimpleGrid>
 
       <Divider
-                mt={rem(48)}
-                color="gray"
-                size="sm"
-                mb="xs"
-                label={
-                    <>
-                        <Text className={classes.headlineText} color="black" tt="uppercase">LASTEST NEWS</Text>
-                        <Space w="sm" />
-                    </>
-                }
-            />
+        mt={rem(48)}
+        color="gray"
+        size="sm"
+        mb="xs"
+        label={
+          <>
+            <Text className={classes.headlineText} color="black" tt="uppercase">LASTEST NEWS</Text>
+            <Space w="sm" />
+          </>
+        }
+      />
       <SimpleGrid
-                breakpoints={[
-                    { minWidth: 'xs', cols: 1 },
-                    { minWidth: 'sm', cols: 2 },
-                ]}
-            >
-          {newsWorldData.map((item: any, index: any) => <NewsCard category={category ?? null} news={item} />)}
+        breakpoints={[
+          { minWidth: 'xs', cols: 1 },
+          { minWidth: 'sm', cols: 2 },
+        ]}
+      >
+        {newsWorldData.map((item: any, index: any) => <NewsCard category={category ?? null} news={item} />)}
       </SimpleGrid>
     </Container>
   );
