@@ -1,14 +1,17 @@
-import { SimpleGrid } from "@mantine/core";
-import { Stack, Button } from "@mantine/core";
+import { Box, Divider, SimpleGrid, Space, rem } from "@mantine/core";
+import { Stack, Button, Text } from "@mantine/core";
 import { Container } from "@mantine/core";
 import Newscard from "../components/News";
 import { useParams } from "react-router-dom";
 import NewsStack from "../components/NewsStack";
 import { NewsInterface } from "../utils/newsUtils";
+import { headlineNewsStyles } from "../styles/headlineNews"
 import { useEffect } from "react";
+import NewsCard from "../components/News";
 
 const News = () => {
   const { category } = useParams();
+  const { classes } = headlineNewsStyles();
   const newsWorldData: NewsInterface[] = [
     {
       title: "Rescuers are racing the clock in search for a manned submersible lost while touring Titanic wreckage - CNN",
@@ -64,18 +67,46 @@ const News = () => {
     console.log(category)
     // เช็คว่า category มี การ update หรือไม่ ถ้า update จะทำอะไร
   }, [category]);
-  console.log(newsWorldData)
   return (
-    <SimpleGrid cols={2}>
-      <Newscard category={category ?? null} news={newsWorldData[0]} />
-      <Stack justify="flex-start">
-        <NewsStack category={category ?? null} news={newsWorldData[1]} />
-        <NewsStack category={category ?? null} news={newsWorldData[2]} />
-        <NewsStack category={category ?? null} news={newsWorldData[3]} />
-      </Stack>
-      <Newscard category={category ?? null} news={newsWorldData[4]} />
-      <Newscard category={category ?? null} news={newsWorldData[5]} />
-    </SimpleGrid>
+    <Container>
+      <Text className={classes.headlineText} color="black" tt="uppercase" my="xl">{category}</Text>
+
+      <SimpleGrid
+                breakpoints={[
+                    { minWidth: 'xs', cols: 1 },
+                    { minWidth: 'sm', cols: 2 },
+                ]}
+            >
+        <Newscard category={category ?? null} news={newsWorldData[0]} />
+        <Stack justify="flex-start">
+          <NewsStack category={category ?? null} news={newsWorldData[2]} />
+          <NewsStack category={category ?? null} news={newsWorldData[3]} />
+        </Stack>
+        <Newscard category={category ?? null} news={newsWorldData[4]} />
+        <Newscard category={category ?? null} news={newsWorldData[1]} />
+      </SimpleGrid>
+
+      <Divider
+                mt={rem(48)}
+                color="gray"
+                size="sm"
+                mb="xs"
+                label={
+                    <>
+                        <Text className={classes.headlineText} color="black" tt="uppercase">LASTEST NEWS</Text>
+                        <Space w="sm" />
+                    </>
+                }
+            />
+      <SimpleGrid
+                breakpoints={[
+                    { minWidth: 'xs', cols: 1 },
+                    { minWidth: 'sm', cols: 2 },
+                ]}
+            >
+          {newsWorldData.map((item: any, index: any) => <NewsCard category={category ?? null} news={item} />)}
+      </SimpleGrid>
+    </Container>
   );
 };
 

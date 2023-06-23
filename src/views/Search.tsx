@@ -64,7 +64,7 @@ const Search = () => {
               },
             },
           })}
-          onKeyUp={(e) => e.key === "Enter" && handleSearch()}
+          onKeyUp={(e) => e.key === "Enter" && handleSearch(e.currentTarget.value)}
         />
         {
           loading ? <Center><Loader color="gray" size="lg" /></Center> : <>{news.map((item: any, index: any) => <Box key={index} my="xl"><News category={null} news={item} /></Box>)}</>

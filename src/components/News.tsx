@@ -19,8 +19,8 @@ const News = ({ category, news }: NewsProps) => {
             <Box>
                 <Card.Section mt="xs">
                     { category && <Center ml={rem(6)} inline>
-                        <IconMinusVertical color={color[category.value as keyof colorInterface]} />
-                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category.label}</Text>
+                        <IconMinusVertical color={color[category.value ?? category as keyof colorInterface]} />
+                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category.label ?? category}</Text>
                     </Center>
                     }
                 </Card.Section>
