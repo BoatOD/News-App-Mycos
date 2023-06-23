@@ -1,8 +1,9 @@
-import { Box, Card, Center, MediaQuery, Text } from "@mantine/core"
+import { Box, Card, Center, MediaQuery, Text, rem } from "@mantine/core"
 import { headlineNewsStyles } from "../styles/headlineNews";
 import { IconMinusVertical } from "@tabler/icons-react";
 import * as dayjs from 'dayjs'
 import { NewsProps } from "../utils/newsUtils";
+import { color, colorInterface } from "../styles/headlineNews";
 
 const News = ({ category, news }: NewsProps) => {
     const noImage = "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
@@ -17,25 +18,21 @@ const News = ({ category, news }: NewsProps) => {
             </Card.Section>
             <Box>
                 <Card.Section mt="xs">
-                    <Center ml="xs" inline>
-                        <IconMinusVertical color="gray" />
-                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
+                    <Center ml={rem(6)} inline>
+                        <IconMinusVertical color={color[category.value as keyof colorInterface]} />
+                        <Text weight={500} size="md" color="dimmed" tt="capitalize">{category.label}</Text>
                     </Center>
                 </Card.Section>
                 <MediaQuery className={classes.text} smallerThan="xs" styles={{ display: "block" }}>
                     <Box>
                         <Text lineClamp={2} weight={500} size="lg">{news.title}</Text>
-                        <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
-                            {news.description}
-                        </Text>
+                        <Text className={classes.textDescription} dangerouslySetInnerHTML={{ __html: news.description ?? '' }} mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed"></Text>
                     </Box>
                 </MediaQuery>
                 <MediaQuery className={classes.text} largerThan="xs" smallerThan="sm" styles={{ display: "block" }}>
                     <Box>
                         <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
-                        <Text mt="xs" lineClamp={4} size="md" weight={300} color="dimmed">
-                            {news.description}
-                        </Text>
+                        <Text className={classes.textDescription} dangerouslySetInnerHTML={{ __html: news.description ?? '' }} mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed"></Text>
                         <Text mt="xs" size="md" weight={300} color="dimmed">
                             {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
                         </Text>
@@ -44,9 +41,7 @@ const News = ({ category, news }: NewsProps) => {
                 <MediaQuery className={classes.text} largerThan="sm" smallerThan="md" styles={{ display: "block" }}>
                     <Box>
                         <Text lineClamp={2} weight={500} size="lg">{news.title}</Text>
-                        <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
-                            {news.description}
-                        </Text>
+                        <Text className={classes.textDescription} dangerouslySetInnerHTML={{ __html: news.description ?? '' }} mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed"></Text>
                         <Text mt="xs" size="sm" weight={300} color="dimmed">
                             {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
                         </Text>
@@ -55,9 +50,7 @@ const News = ({ category, news }: NewsProps) => {
                 <MediaQuery className={classes.text} smallerThan="lg" largerThan="md" styles={{ display: "block" }}>
                     <Box>
                         <Text lineClamp={3} weight={500} size="lg">{news.title}</Text>
-                        <Text mt="xs" lineClamp={2} size="sm" weight={300} color="dimmed">
-                            {news.description}
-                        </Text>
+                        <Text className={classes.textDescription} dangerouslySetInnerHTML={{ __html: news.description ?? '' }} mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed"></Text>
                         <Text mt="xs" size="sm" weight={300} color="dimmed">
                             {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
                         </Text>
@@ -66,9 +59,7 @@ const News = ({ category, news }: NewsProps) => {
                 <MediaQuery className={classes.text} largerThan="lg" styles={{ display: "block" }}>
                     <Box>
                         <Text lineClamp={3} weight={500} size="xl">{news.title}</Text>
-                        <Text mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed">
-                            {news.description}
-                        </Text>
+                        <Text className={classes.textDescription} dangerouslySetInnerHTML={{ __html: news.description ?? '' }} mt="xs" lineClamp={3} size="sm" weight={300} color="dimmed"></Text>
                         <Text mt="xs" size="sm" weight={300} color="dimmed">
                             {dayjs(news.date).format('D MMMM YYYY')} | {news.author ?? "N/A"}
                         </Text>

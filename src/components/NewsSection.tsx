@@ -15,7 +15,7 @@ const NewsSection = ({ category }: NewsSectionProps) => {
         try {
             const { data } = await axios.get(`${import.meta.env.VITE_NEWS_API_URL}?apiKey=${import.meta.env.VITE_NEWS_API_KEY}&country=${country}&category=${category.value}&pageSize=2&sortBy=popularity`);
             data.articles.forEach((item: any) => {
-                setNews((prevItem) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.author, url: item.url, imageUrl: item.urlToImage }])
+                setNews((prevItem) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.source.name, url: item.url, imageUrl: item.urlToImage }])
             });
         } catch (error) {
             console.error(error);
@@ -45,7 +45,7 @@ const NewsSection = ({ category }: NewsSectionProps) => {
                     { minWidth: 'sm', cols: 2 },
                 ]}
             >
-                {news.map((item, index) => <News key={index} category={category.label} news={item} />)}
+                {news.map((item, index) => <News key={index} category={category} news={item} />)}
             </SimpleGrid>
             <Group position="right">
                 <Button mt={rem(16)} component={Link} to={`/${category.value}`} className={classes.buttonMore} rightIcon={<IconArrowRight className={classes.arrow} />} variant="outline" radius="xl" uppercase>
