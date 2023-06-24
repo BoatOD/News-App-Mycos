@@ -29,8 +29,8 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                 <a href={item?.url} target="_blank">
                                     <Box className={classes.imageContainer}>
                                         <Box className={classes.image}>
-                                            <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
-                                        </Box>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                         <Group className={classes.detailImage} position="center">
                                             <Box>
                                                 <Text align="center" className={classes.headlineText}>{item.title}</Text>
@@ -62,8 +62,8 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                 <a href={item?.url} target="_blank">
                                     <Box className={classes.imageContainer}>
                                         <Box className={classes.image}>
-                                            <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
-                                        </Box>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                         <Group className={classes.detailImage} position="center">
                                             <Box>
                                                 <Text align="center" className={classes.headlineText}>{item.title}</Text>
@@ -95,8 +95,8 @@ const CarousalSlider = ({ data }: CarousalProps) => {
                                 <a href={item?.url} target="_blank">
                                     <Box className={classes.imageContainer}>
                                         <Box className={classes.image}>
-                                            <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
-                                        </Box>
+                                                    <LazyLoadImage height={"100%"} width={"100%"} effect="blur" src={item?.imageUrl} />
+                                                </Box>
                                         <Group className={classes.detailImage} position="center">
                                             <Box>
                                                 <Text align="center" className={classes.headlineText}>{item.title}</Text>

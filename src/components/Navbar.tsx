@@ -85,6 +85,7 @@ const Navbar = ({ tabs }: HeaderTabsProps) => {
             <Container>
                 <Center>
                     <Tabs
+                    keepMounted={false}
                         variant="outline"
                         classNames={{
                             root: classes.tabs,

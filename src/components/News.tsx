@@ -7,6 +7,7 @@ import { color } from "../utils/newsUtils";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import '../styles/lazyload.css'
+import loading from '../assets/loading5.gif'
 
 const News = ({ category, news }: NewsProps) => {
     const noImage = "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
@@ -16,7 +17,7 @@ const News = ({ category, news }: NewsProps) => {
             <Card.Section className={classes.imageCard} >
                 <LazyLoadImage
                     effect="blur"
-                    placeholderSrc="https://hackernoon.com/images/0*4Gzjgh9Y7Gu8KEtZ.gif"
+                    placeholderSrc={loading}
                     className={classes.image}
                     src={news.imageUrl ?? noImage}
                 />
@@ -24,7 +25,7 @@ const News = ({ category, news }: NewsProps) => {
             <Box>
                 <Card.Section mt="xs">
                     { category && <Center ml={rem(6)} inline>
-                        <IconMinusVertical color={color[category]} />
+                        <IconMinusVertical color={color[category.toLowerCase() ?? "general"]} />
                         <Text weight={500} size="md" color="dimmed" tt="capitalize">{category}</Text>
                     </Center>
                     }

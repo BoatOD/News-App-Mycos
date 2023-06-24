@@ -18,18 +18,17 @@ const Search = () => {
 
   const handleSearch = async (value: string) => {
     try {
+      const { data } = await axios.get(`${import.meta.env.VITE_NEWS_SEARCH_API_URL}?q=${value}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&pageSize=20&page=${page}&sortBy=popularity`);
       if (page <= 1) {
         setLoading(true)
-        const { data } = await axios.get(`${import.meta.env.VITE_NEWS_SEARCH_API_URL}?q=${value}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&pageSize=10&page=${page}&sortBy=popularity`);
         data.articles.forEach((item: any) => {
-          setNews((prevItem: any) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.author, url: item.url, imageUrl: item.urlToImage }])
+          setNews((prevItem: any) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.source.name, url: item.url, imageUrl: item.urlToImage }])
         });
         setLoading(false)
         setPage(page => page + 1)
         setCountNews(countNews => countNews + data.articles.length)
         setTotalResult(data.totalResults === 0 ? -1 : data.totalResults)
       } else {
-        const { data } = await axios.get(`${import.meta.env.VITE_NEWS_SEARCH_API_URL}?q=${value}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}&pageSize=20&page=${page}&sortBy=popularity`);
         data.articles.forEach((item: any) => {
           setNews((prevItem: any) => [...prevItem, { title: item.title, description: item.description, date: new Date(item.publishedAt), author: item.author, url: item.url, imageUrl: item.urlToImage }])
         });
@@ -60,6 +59,10 @@ const Search = () => {
     setTotalResult(0);
   }, [searchQuery])
 
+  useEffect(() => {
+    console.log(page)
+  }, [page])
+
   return (
     <Grid>
       <Grid.Col span="auto"></Grid.Col>
@@ -88,19 +91,17 @@ const Search = () => {
           })}
           onKeyUp={(e) => e.key === "Enter" && handleSearch(e.currentTarget.value)}
         />
-        {
-          loading ? <Center><Loader color="gray" size="lg" /></Center> :
-            news && news.length > 0 ?
-              <InfiniteScroll
-                pageStart={page}
-                loadMore={() => handleSearch(searchQuery)}
-                threshold={350}
-                hasMore={countNews < totalResult}
-                loader={<Center key={0}><Loader color="gray" size="lg" key={0} /></Center>}
-              >
-                {news.map((item: any, index: any) => <Box key={index} my="xl"><News category={null} news={item} /></Box>)}
-              </InfiniteScroll> : <></>
-        }
+        {loading && <Center><Loader color="gray" size="lg" /></Center>}
+        {news && news.length > 0 &&
+          <InfiniteScroll
+            pageStart={page}
+            loadMore={() => handleSearch(searchQuery)}
+            threshold={350}
+            hasMore={countNews < totalResult}
+            loader={<Center key={0}><Loader color="gray" size="lg" /></Center>}
+          >
+            {news.map((item: any, index: any) => <Box key={index} my="xl"><News category={null} news={item} /></Box>)}
+          </InfiniteScroll>}
         {totalResult === -1 && !loading && <Center><Text weight={500} color="black" size="xl">Nothing to show</Text></Center>}
       </Grid.Col>
       <Grid.Col span="auto"></Grid.Col>

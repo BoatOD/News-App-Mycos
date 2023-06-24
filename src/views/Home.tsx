@@ -1,4 +1,4 @@
-import { Box, Container, rem } from '@mantine/core';
+import { Box, Button, Container, rem } from '@mantine/core';
 import CarousalSlider from '../components/Carousal';
 import HeadlineNews from '../components/HeadlineNews';
 import { CarousalData } from '../utils/carousalUtils';

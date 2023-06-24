@@ -23,14 +23,12 @@ const News = () => {
     
     async function fetchData() {
       setLoading(true)
-      fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=22f1aa94799147b78e0c9459099831f6`)
+      fetch(`${import.meta.env.VITE_NEWS_API_URL}?country=us&category=${category}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`)
         .then(res => res.json())
         .then(json => {
-          // console.log(json)
           const test = json.articles.slice(0, 5)
 
           test.forEach((element: any) => {
-            // console.log(element)
             setNewsF5((prevNewsData) => [...prevNewsData, {
               title: element.title,
               description: element.description,
@@ -41,11 +39,8 @@ const News = () => {
             }])
           });
 
-          console.log(newsF5)
           json.articles.splice(0, 5)
-          console.log(json)
           json.articles.forEach((element: any) => {
-            // console.log(element)
             setNews((prevNewsData) => [...prevNewsData, {
               title: element.title,
               description: element.description,
@@ -79,16 +74,16 @@ const News = () => {
           ]}
         >
           {newsF5 && newsF5.length > 0 ? <>
-            <Newscard category={category ?? null} news={newsF5[0]} />
+            <Newscard category={categoryMapper[category ?? "general"]} news={newsF5[0]} />
             <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
               <Stack align="center">
-                <NewsStack category={category ?? null} news={newsF5[2]} />
-                <NewsStack category={category ?? null} news={newsF5[3]} />
+                <NewsStack category={categoryMapper[category ?? "general"]} news={newsF5[2]} />
+                <NewsStack category={categoryMapper[category ?? "general"]} news={newsF5[3]} />
               </Stack>
             </MediaQuery>
 
-            <Newscard category={category ?? null} news={newsF5[4]} />
-            <Newscard category={category ?? null} news={newsF5[1]} />  </>
+            <Newscard category={categoryMapper[category ?? "general"]} news={newsF5[4]} />
+            <Newscard category={categoryMapper[category ?? "general"]} news={newsF5[1]} />  </>
             : <></>}
         </SimpleGrid>
 
@@ -110,7 +105,7 @@ const News = () => {
             { minWidth: 'sm', cols: 2 },
           ]}
         >
-          {news.map((item: any, index: any) => <NewsCard key={index} category={category ?? null} news={item} />)}
+          {news.map((item: any, index: any) => <NewsCard key={index} category={categoryMapper[category ?? "general"]} news={item} />)}
         </SimpleGrid>
       </>}
     </Container>
@@ -118,4 +113,3 @@ const News = () => {
 };
 
 export default News;
-
